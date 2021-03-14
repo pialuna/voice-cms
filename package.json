@@ -1,0 +1,23 @@
+{
+  "name": "voice-cms",
+  "version": "1.0.0",
+  "description": "a cms for voice apps",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run setup",
+    "setup": "npm run setup:api && npm run setup:client",
+    "setup:api": "cd api && npm i && cd ..",
+    "setup:client": "cd client && npm i && cd ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pialuna/voice-cms.git"
+  },
+  "author": "Pia",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/pialuna/voice-cms/issues"
+  },
+  "homepage": "https://github.com/pialuna/voice-cms#readme"
+}
