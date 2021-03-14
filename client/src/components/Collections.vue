@@ -102,30 +102,35 @@
     </el-dialog>
     <!-- Dialog End -->
 
-    <el-card class="collections-overview" v-loading="loading">
-      <h3>Collections Overview</h3>
-      <el-button type="primary" icon="el-icon-plus" circle @click="openDialog" class="add-button"></el-button>
-      <el-container v-loading="loading">
+    <div class="bg-white shadow rounded-lg p-8 mt-8">
+      <div class="flex justify-between items-center pb-6 mb-8 border-b">
+        <h3 class="text-xl font-bold text-gray-900">Collections</h3>
+        <button @click="openDialog" class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200">
+			New Collection
+		</button>
+      </div>
         <div v-for="collection in collections" :key="collection._id">
           <router-link
             :to="{ path: '/projects/' + projectId + '/collections/' + collection._id }"
             replace
           >
-            <el-card>
-              <h4>
+            <div class="mb-6">
+              <h4 class="font-bold mb-2">
                 <a>{{ collection.name }}</a>
               </h4>
-              <div v-for="(property, index) in collection.properties" :key="index">
-                <el-tag size="small" type="info">
-                  <i :class="icon(property.type)"></i>
-                  {{ property.name }}
-                </el-tag>
+              <div class="flex flex-wrap">
+                <div class="mr-1 mb-1" v-for="(property, index) in collection.properties" :key="index">
+                  <el-tag size="small" type="info">
+                    <i :class="icon(property.type)"></i>
+                    {{ property.name }}
+                  </el-tag>
+                </div>
               </div>
-            </el-card>
+            </div>
           </router-link>
         </div>
-      </el-container>
-    </el-card>
+    </div>
+
   </div>
 </template>
 
@@ -280,63 +285,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.add-button {
-  margin: 10px 0 10px 0;
-}
-
-.collections-overview {
-  background-color: aliceblue;
-  padding: 10px;
-}
-
-.el-card {
-  margin: 3px;
-}
-
-.prop-field {
-  width: 200px;
-}
-
-.new-prop {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  align-items: baseline;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-.new-prop > * {
-  margin: 0 8px 0 0;
-}
-
-.new-prop > .el-button {
-  margin: 10px;
-}
-
-.array-hr {
-  margin: 10px 0 10px 0;
-  padding: 0;
-}
-
-/* for Locale Tags */
-.el-tag {
-  margin: 3px;
-}
-
-.button-new-tag {
-  margin: 3px;
-  height: 32px;
-  line-height: 30px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.input-new-tag {
-  width: 90px;
-  margin: 3px;
-  vertical-align: bottom;
-}
-</style>

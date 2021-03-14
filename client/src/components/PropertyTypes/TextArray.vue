@@ -2,25 +2,28 @@
   <div class="textarray-div">
     <div v-if="active">
       <div 
-	  v-for="(value, index) in tempValues" 
-	  :key="index">
+	    v-for="(value, index) in tempValues" 
+	    :key="index"
+        class="flex items-center">
         <!-- input field -->
         <el-input 
-		v-model="tempValues[index]" 
-		type="textarea" autosize 
-		placeholder="text">
+		  v-model="tempValues[index]" 
+		  type="textarea" autosize 
+		  placeholder="text"
+    	  class="">
 		</el-input>
         <!-- delete -->
         <el-button 
-		@click="remove(value)" 
-		icon="el-icon-delete" 
-		circle size="mini"
+		  @click="remove(value)" 
+		  icon="el-icon-delete" 
+		  circle size="mini"
+    	  class="flex-none"
 		></el-button>
       </div>
       <el-button 
-	  @click="add()" 
-	  icon="el-icon-plus" 
-	  circle size="mini"
+	    @click="add()" 
+	    icon="el-icon-plus" 
+	    circle size="mini"
 	  ></el-button>
     </div>
     <div v-else 
@@ -88,7 +91,7 @@ export default {
 
 	// display the {{variables}} in texts as highlighted tags
     parseVariables(value) {
-      let openTag = '<span class="el-tag el-tag--mini">';
+      let openTag = '<span class="el-tag el-tag--mini bg-indigo-100 text-indigo-500">';
       const closeTag = "</span>";
       const matches = value.match(/{{(\w+)}}/g);
 	  let string = value;

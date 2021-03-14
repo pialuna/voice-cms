@@ -51,31 +51,28 @@
     </el-dialog>
     <!-- Dialog End -->
 
-    <el-card class="projects-overview">
-      <h2>Projects Overview</h2>
-      <el-button
-        type="primary"
-        icon="el-icon-plus"
-        circle
-        @click="openDialog"
-        class="add-button"
-      ></el-button>
-      <div v-for="project in projects" :key="project._id">
-        <router-link :to="'/projects/' + project._id">
-          <el-card class="box-card">
-            <h4>
-              <a>{{ project.name }}</a>
-            </h4>
-          </el-card>
-        </router-link>
-      </div>
-    </el-card>
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold text-gray-900">Projects</h2>
+      <button @click="openDialog" class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200">
+		  New Project
+	  </button>
+    </div>
+
+    <div v-for="project in projects" :key="project._id">
+      <router-link :to="'/projects/' + project._id">
+        <div class="bg-white p-4 mb-4 shadow rounded-lg">
+          <h4 class="text-gray-900">
+            <a>{{ project.name }}</a>
+          </h4>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  // projects already get initializied by App created()
+  // projects already get initialized by App created()
 
   computed: {
     projects() {
@@ -129,13 +126,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.projects-overview {
-  background-color: aliceblue;
-  padding: 20px;
-}
-.el-card {
-  margin-bottom: 10px;
-}
-</style>

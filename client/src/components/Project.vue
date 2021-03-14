@@ -1,7 +1,6 @@
  <template>
-  <div class="project">
-    <h2>{{ project.name }}</h2>
-	<p>Project Dashboard </p>
+  <div>
+    <h2 class="text-2xl font-bold text-gray-900">{{ project.name }}</h2>
 	
     <div>
       <collections-component
@@ -39,9 +38,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.project {
-  padding: 20px;
-}
-</style>

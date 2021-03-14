@@ -1,5 +1,24 @@
  <template>
-  <tr :class="'tablerow ' + tablerow">
+  <tr :class="'hover:bg-indigo-100 border-b border-gray-200 transition ease-out duration-200 tablerow ' + tablerow">
+
+    <td v-for="(property, index) in properties" :key="index" class="px-2 py-6">
+      <!-- the objects "item" and "tempItem" are passed down to property-component.
+      item: for knowing the true value, that's in the store and db. 
+      tempItem: a copy of "item" for editing and caching. -->
+      <property-component
+      :item="item"
+          :tempItem="tempItem"
+          :propertyType="property.type"
+          :propertyName="property.name"
+          :collectionId="collectionId"
+          :projectId="projectId"
+          :active="active"
+      :i18n="property.i18n"
+      :currentLocale="currentLocale"
+      :variables="variables"
+      ></property-component>
+    </td>
+    
     <!-- BUTTONS -->
     <td class="buttons-td">
       <div class="buttons-div">
@@ -37,29 +56,7 @@
         </div>
       </div>
     </td>
-	<!-- optional ID field (just for debugging). 
-		the header <th>_id</th> is in Collection.vue -->
-	<!-- <td> {{ _id }} </td> -->
 
-	<td v-for="(property, index) in properties" :key="index">
-		<!-- the objects "item" and "tempItem" are passed down to property-component.
-		item: for knowing the true value, that's in the store and db. 
-		tempItem: a copy of "item" for editing and caching. -->
-		<property-component
-		:item="item"
-        :tempItem="tempItem"
-        :propertyType="property.type"
-        :propertyName="property.name"
-        :collectionId="collectionId"
-        :projectId="projectId"
-        :active="active"
-		:i18n="property.i18n"
-		:currentLocale="currentLocale"
-		:variables="variables"
-		></property-component>
-	</td>
-	<!-- empty td for the "new Property" column -->
-	<td></td>
   </tr>
 </template>
 
@@ -166,15 +163,8 @@ export default {
 </script>
 
 <style scoped>
-tr {
-  padding: 0;
-}
 .new-item {
 	background-color: #f6f6f6;
-}
-.tablerow:hover {
-  background-color: #ecf5ff;
-  transition: 0.3s;
 }
 .tablerow > td > .buttons-div > div > .edit-button {
   visibility: hidden;
@@ -183,16 +173,7 @@ tr {
   visibility: visible;
   transition: 2s;
 }
-td {
-  margin: 0;
-  padding: 0;
-  padding: 5px;
-  border-bottom: 1px solid #eee;
-}
 .el-button--mini.is-circle {
 	margin: 3px
-}
-.buttons-td {
-  max-width: 140px;
 }
 </style>

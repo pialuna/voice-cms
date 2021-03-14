@@ -6,9 +6,12 @@
         :key="index"
         closable
         disable-transitions
+        class="bg-indigo-200"
         @close="handleClose(value)"
         size="medium"
-      >{{value}}</el-tag>
+      >
+	  	{{value}}
+	  </el-tag>
       <el-input
         class="input-new-tag"
         v-if="inputVisible"
@@ -18,15 +21,20 @@
         @keyup.enter.native="handleInputConfirm"
         @blur="handleInputConfirm"
       ></el-input>
-      <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+      <el-button v-else class="button-new-tag" size="small" @click="showInput">
+		  + New Tag
+	  </el-button>
     </div>
     <div v-else>
       <el-tag
         :key="value"
         v-for="value in values"
         disable-transitions
+        class="bg-indigo-100 text-indigo-500"
         size="medium"
-      >{{value}}</el-tag>
+      >
+	  	{{value}}
+	  </el-tag>
     </div>
   </div>
 </template>

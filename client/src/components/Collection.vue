@@ -1,16 +1,5 @@
  <template>
   <div>
-    <el-menu :default-active="collection.name" class="el-menu-demo" mode="horizontal">
-      <el-menu-item v-for="coll in collections" :key="coll._id" :index="coll.name">
-        <router-link
-          :to="{ path: '/projects/' + projectId + '/collections/' + coll._id }"
-          replace
-          activeClass="active"
-          tag="li"
-        >{{coll.name}}</router-link>
-      </el-menu-item>
-    </el-menu>
-
     <!-- Dialog Create New Property -->
     <el-dialog :visible.sync="createPropDialogVisible">
       <span slot="title">
@@ -21,7 +10,10 @@
       <div>
         <el-card>
           <h5>Name</h5>
-          <el-input v-model="propertyName" placeholder="Property Name (Column Name)"></el-input>
+          <el-input 
+		  v-model="propertyName" 
+		  placeholder="Property Name (Column Name)">
+		  </el-input>
         </el-card>
         <el-card>
           <h5>Type</h5>
@@ -30,7 +22,11 @@
               <i :class="icon(propertyType)"></i>
             </el-tag>
             <el-tooltip content="The type of content that can be saved in this property (column).">
-              <el-select v-model="propertyType" placeholder="Type" class="prop-field" size="small">
+              <el-select 
+			  v-model="propertyType" 
+			  placeholder="Type" 
+			  class="prop-field" 
+			  size="small">
                 <el-option
                   v-for="type in types"
                   :key="type.value"
@@ -62,70 +58,65 @@
     </el-dialog>
     <!-- Dialog End  -->
 
-    <h2>{{ collection.name }}</h2>
-    <!-- edit not implemented -->
-    <!-- <el-button
-            @click="collectionDialogVisible = true"
-            class="edit-button"
-            size="mini"
-            icon="el-icon-edit"
-            circle
-    ></el-button>-->
 
-    <el-input v-model="search" size="small" placeholder="Type to search" class="searchbar">
-      <i slot="prefix" class="el-input__icon el-icon-search"></i>
-    </el-input>
+    <h2 class="text-2xl font-bold text-gray-900">{{ projectName }}</h2>
 
-    <!-- Variables -->
-    <!-- <div v-if="variables" class="variables">
-      <div v-for="(variable, index) in variables" :key="index">
-        <span style="width:100px;">
-          <el-tag size="mini" style="width:100px;">{{ variables[index].name }}</el-tag>
-        </span>
-        <el-input size="mini" style="width:200px;" v-model="variables[index].value"></el-input>
-      </div>
-    </div> -->
+    <div class="mt-4">
 
-    <el-button type="primary" circle icon="el-icon-plus" @click="newItem" class="add-button"></el-button>
+    <div class="flex">
+        <router-link
+          v-for="coll in collections" :key="coll._id" :index="coll.name" href="#"
+          :to="{ path: '/projects/' + projectId + '/collections/' + coll._id }"
+          replace
+          class="rounded pt-3 pb-3.5 px-4"
+          activeClass="bg-white shadow-tab"
+        >{{coll.name}}</router-link>
+     </div>
 
-    <div class="overflow-table">
-      <!-- locale tabs -->
-      <div v-loading="loading">
-        <el-tabs v-model="currentLocale">
+    <div class="bg-white shadow rounded-lg py-2 px-4 -mt-1">
+
+    <div class="flex justify-between border-b border-gray-300">
+
+      <el-tabs v-model="currentLocale">
           <el-tab-pane
             v-for="locale in collection.locales"
             :key="locale"
             :name="locale"
             :label="locale"
           >
-            <span slot="label" style="padding: 0 20px">
+            <span class="px-2" slot="label">
               <i class="el-icon-location"></i>
               {{locale}}
             </span>
           </el-tab-pane>
         </el-tabs>
+
+      <div class="flex my-2">
+        <input v-model="search" type="search" name="search" placeholder="Search" class="bg-gray-50 shadow-inner mr-2 h-10 pl-6 pr-4 rounded-full text-sm focus:outline-none">
+
+        <button @click="newItem" class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200">
+			New Item
+		</button>
       </div>
-      <table>
-        <thead>
+    </div>
+
+
+    <div class="overflow-auto">
+
+      <table class="w-full table-auto text-sm">
+        <thead class="text-left bg-gray-100">
           <tr>
 
-            <!-- Operations Column with Buttons -->
-            <th></th>
-
-            <!-- optional ID column header field (just for debugging). 
-            the data field <td>_id</td> is in Item.vue-->
-            <!-- <th>_id</th> -->
-
             <!-- a Column for each Item Property -->
-            <th v-for="(property, index) in properties" :key="index">
+            <th class="py-4" v-for="(property, index) in properties" :key="index">
               <!-- type icon, i18n icon -->
-              <div class="prop-name">
+              <div class="text-gray-900 pl-2">
                 {{ property.name }}
-                <el-tag size="mini" type="info">
-                  <i :class="icon(property.type)"></i>
+                <el-tag size="mini" class="bg-gray-200 border-gray-300">
+                  <i :class="icon(property.type)" class="text-gray-500"></i>
                 </el-tag>
-                <el-tag v-if="property.i18n" size="mini">
-                  <i class="el-icon-location"></i>
+                <el-tag v-if="property.i18n" size="mini" class="bg-indigo-100 border-indigo-200">
+                  <i class="el-icon-location text-indigo-500"></i>
                 </el-tag>
               </div>
             </th>
@@ -140,6 +131,9 @@
               ></el-button>
             </th>  -->
 
+            <!-- Operations Column with Buttons -->
+            <th></th>
+			
           </tr>
         </thead>
 
@@ -163,7 +157,9 @@
         </tbody>
 		
       </table>
+      </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -368,42 +364,6 @@ export default {
 .add-button {
   margin: 5px 0 15px 0;
 }
-.searchbar {
-  display: block;
-  margin-bottom: 20px;
-  width: 300px;
-}
-.overflow-table {
-  overflow: auto;
-}
-table {
-  width: 100%;
-  font-size: 14px;
-  border-spacing: 0;
-}
-thead {
-  /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.1); */
-  border-bottom: 2px solid #eee;
-}
-th {
-  background: #fafafa;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  text-align: left;
-  padding: 3px;
-}
-.prop-name {
-  padding: 0 4px;
-}
-.prop-type {
-  background-color: #f6f6f6;
-  color: #aaa;
-  font-size: 80%;
-  font-weight: 200;
-  padding: 0 4px;
-  margin: 5px 0;
-}
 /* Element UI */
 .el-alert {
   margin-top: 10px;
@@ -411,5 +371,9 @@ th {
 .el-textarea {
   width: 90%;
   margin-right: 5px;
+}
+
+.el-tabs__header {
+    margin: 0;
 }
 </style>

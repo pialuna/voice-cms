@@ -1,10 +1,6 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <p>This is your Dashboard!</p>
-
+  <div class="">
     <projects-component></projects-component>
-
   </div>
 </template>
 
@@ -17,10 +13,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.home {
-  padding: 20px;
-  height: 100vh;
-}
-</style>

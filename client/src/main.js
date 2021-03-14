@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
 import 'element-theme-chalk';
 import locale from 'element-ui/lib/locale/lang/en';
+import './index.css'
 
 import App from './App.vue'
 import { routes } from './routes';
