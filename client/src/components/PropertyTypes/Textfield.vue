@@ -2,7 +2,11 @@
   <div class="textfield-div">
     <div></div>
     <div v-show="active">
-      <el-input v-model="tempValue" :placeholder="propertyName" size="medium"></el-input>
+      <el-input
+        v-model="tempValue"
+        :placeholder="propertyName"
+        size="medium"
+      ></el-input>
     </div>
     <div v-show="!active" class="text">
       {{ actualValue }}
@@ -12,8 +16,7 @@
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
   computed: {
     actualValue() {
@@ -37,42 +40,42 @@ export default {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
+      },
     },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
+      type: String,
     },
     i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

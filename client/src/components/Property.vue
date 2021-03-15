@@ -10,10 +10,10 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></boolean-component>
     </div>
-	<div v-if="checkbox">
+    <div v-if="checkbox">
       <checkbox-component
         :item="item"
         :tempItem="tempItem"
@@ -22,7 +22,7 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></checkbox-component>
     </div>
     <div v-if="textfield">
@@ -34,7 +34,7 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></textfield-component>
     </div>
     <div v-if="urlfield">
@@ -46,10 +46,10 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></urlfield-component>
     </div>
-	<div v-if="audiourl">
+    <div v-if="audiourl">
       <audio-component
         :item="item"
         :tempItem="tempItem"
@@ -58,10 +58,10 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></audio-component>
     </div>
-	<div v-if="imageurl">
+    <div v-if="imageurl">
       <image-component
         :item="item"
         :tempItem="tempItem"
@@ -70,11 +70,11 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></image-component>
     </div>
     <div v-if="textarray">
-	  <!-- textarray: pass down response-text-variables -->
+      <!-- textarray: pass down response-text-variables -->
       <textarray-component
         :item="item"
         :tempItem="tempItem"
@@ -83,11 +83,11 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
-		:variables="variables" 
+        :currentLocale="currentLocale"
+        :variables="variables"
       ></textarray-component>
     </div>
-	<div v-if="tags">
+    <div v-if="tags">
       <tags-component
         :item="item"
         :tempItem="tempItem"
@@ -96,10 +96,10 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></tags-component>
     </div>
-	<div v-if="date">
+    <div v-if="date">
       <date-component
         :item="item"
         :tempItem="tempItem"
@@ -108,7 +108,7 @@
         :propertyName="propertyName"
         :i18n="i18n"
         :active="active"
-		:currentLocale="currentLocale"
+        :currentLocale="currentLocale"
       ></date-component>
     </div>
   </div>
@@ -128,14 +128,14 @@ import Tags from "./PropertyTypes/Tags.vue";
 export default {
   components: {
     textfieldComponent: Textfield,
-	urlfieldComponent: UrlField,
-	audioComponent: AudioUrl,
-	imageComponent: ImageUrl,
+    urlfieldComponent: UrlField,
+    audioComponent: AudioUrl,
+    imageComponent: ImageUrl,
     textarrayComponent: TextArray,
-	booleanComponent: BooleanComponent,
-	checkboxComponent: Checkbox,
-	tagsComponent: Tags,
-	dateComponent: DateComponent
+    booleanComponent: BooleanComponent,
+    checkboxComponent: Checkbox,
+    tagsComponent: Tags,
+    dateComponent: DateComponent,
   },
 
   data() {
@@ -146,55 +146,55 @@ export default {
       audiourl: this.propertyType === "audiourl",
       imageurl: this.propertyType === "imageurl",
       textarray: this.propertyType === "textarray",
-	  boolean: this.propertyType === "boolean",
-	  checkbox: this.propertyType === "checkbox",
-	  tags: this.propertyType === "tags",
-	  date: this.propertyType === "date"
+      boolean: this.propertyType === "boolean",
+      checkbox: this.propertyType === "checkbox",
+      tags: this.propertyType === "tags",
+      date: this.propertyType === "date",
     };
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyType: {
       type: String,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     collectionId: {
       type: String,
-      required: true
+      required: true,
     },
     projectId: {
       type: String,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-	},
-	// variables obj array, only for TextArray
-	variables: {
+      required: true,
+    },
+    // variables obj array, only for TextArray
+    variables: {
       type: Array,
-      required: false
-    }
-  }
+      required: false,
+    },
+  },
 };
 </script>

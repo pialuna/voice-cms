@@ -1,18 +1,17 @@
  <template>
   <div class="boolean-div">
     <div v-if="active">
-	  <el-checkbox v-model="tempValue" ></el-checkbox>
+      <el-checkbox v-model="tempValue"></el-checkbox>
     </div>
     <div v-else>
-		<el-checkbox v-model="actualValue" disabled></el-checkbox>
-	</div>
+      <el-checkbox v-model="actualValue" disabled></el-checkbox>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
   computed: {
     actualValue() {
@@ -36,42 +35,42 @@ export default {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
-    }
+      },
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
-	},
-	i18n: {
+      type: String,
+    },
+    i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
-		type: Boolean,
-      default: false
+      type: Boolean,
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -79,33 +78,33 @@ export default {
 /* checkbox style */
 /* not checked */
 .el-checkbox__input .el-checkbox__inner {
-	background-color: #ebeef5;
-    border-color: #409EFF;
+  background-color: #ebeef5;
+  border-color: #409eff;
 }
 /* not checked, disabled */
 .el-checkbox__input.is-disabled .el-checkbox__inner {
-	background-color: #FFF;
-    border-color: #409EFF;
-    cursor: not-allowed;
+  background-color: #fff;
+  border-color: #409eff;
+  cursor: not-allowed;
 }
 /* checked */
 .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #ebeef5;
-    border-color: #409EFF;
-	color: #409EFF;
+  background-color: #ebeef5;
+  border-color: #409eff;
+  color: #409eff;
 }
 .el-checkbox__input.is-checked .el-checkbox__inner::after {
-    border-color: #409EFF;
-	border-width: 3px;
+  border-color: #409eff;
+  border-width: 3px;
 }
 /* checked, disabled */
 .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
-    background-color: #409EFF;
-    border-color: #409EFF;
-	color: #409EFF;
+  background-color: #409eff;
+  border-color: #409eff;
+  color: #409eff;
 }
 .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
-    border-color: #FFFFFF;
-	border-width: 1px;
+  border-color: #ffffff;
+  border-width: 1px;
 }
 </style>

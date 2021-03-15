@@ -4,32 +4,30 @@
       <el-switch
         style="display: block"
         v-model="tempValue"
-		active-color="rgba(103,194,58,.2)"
+        active-color="rgba(103,194,58,.2)"
         inactive-color="rgba(245,108,108,.2)"
         :active-text="`${tempValue}`"
       ></el-switch>
     </div>
     <div v-else>
-		<el-tag v-if="actualValue" 
-		type="success"
-		:disable-transitions="true"
-		size="small"> 
-			{{ actualValue }} 
-		</el-tag>
-		<el-tag v-else 
-		type="danger"
-		:disable-transitions="true"
-		size="small"> 
-			{{ actualValue }} 
-		</el-tag>
-	</div>
+      <el-tag
+        v-if="actualValue"
+        type="success"
+        :disable-transitions="true"
+        size="small"
+      >
+        {{ actualValue }}
+      </el-tag>
+      <el-tag v-else type="danger" :disable-transitions="true" size="small">
+        {{ actualValue }}
+      </el-tag>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
   computed: {
     actualValue() {
@@ -53,42 +51,42 @@ export default {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
-    }
+      },
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
-	},
-	i18n: {
+      type: String,
+    },
+    i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

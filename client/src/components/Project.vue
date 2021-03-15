@@ -1,6 +1,8 @@
  <template>
   <div>
-    <h2 class="text-2xl font-bold text-gray-900">{{ project.name }}</h2>
+    <h2 class="text-2xl font-bold text-gray-900">
+		{{ project.name }}
+	</h2>
 	
     <div>
       <collections-component

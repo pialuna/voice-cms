@@ -10,8 +10,8 @@
         @close="handleClose(value)"
         size="medium"
       >
-	  	{{value}}
-	  </el-tag>
+        {{ value }}
+      </el-tag>
       <el-input
         class="input-new-tag"
         v-if="inputVisible"
@@ -22,8 +22,8 @@
         @blur="handleInputConfirm"
       ></el-input>
       <el-button v-else class="button-new-tag" size="small" @click="showInput">
-		  + New Tag
-	  </el-button>
+        + New Tag
+      </el-button>
     </div>
     <div v-else>
       <el-tag
@@ -33,19 +33,17 @@
         class="bg-indigo-100 text-indigo-500"
         size="medium"
       >
-	  	{{value}}
-	  </el-tag>
+        {{ value }}
+      </el-tag>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
-  mounted() {
-  },
+  mounted() {},
 
   computed: {
     values() {
@@ -71,14 +69,14 @@ export default {
         } else {
           this.tempItem[this.propertyName] = array;
         }
-      }
-    }
+      },
+    },
   },
 
   data() {
     return {
       inputVisible: false,
-      inputValue: ""
+      inputValue: "",
     };
   },
 
@@ -89,7 +87,7 @@ export default {
     },
     showInput() {
       this.inputVisible = true;
-      this.$nextTick(_ => {
+      this.$nextTick((_) => {
         this.$refs.saveTagInput.$refs.input.focus();
       });
     },
@@ -100,41 +98,41 @@ export default {
       }
       this.inputVisible = false;
       this.inputValue = "";
-    }
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
+      type: String,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

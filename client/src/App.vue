@@ -18,7 +18,6 @@ export default {
   created() {
     this.$store.dispatch("initProjects");
   },
-  
 };
 </script>
 
@@ -29,7 +28,7 @@ export default {
   color: #2c3e50;
 }
 .el-main {
-	overflow: hidden;
+  overflow: hidden;
 }
 </style>
 

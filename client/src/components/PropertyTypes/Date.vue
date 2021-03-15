@@ -1,14 +1,15 @@
  <template>
   <div>
     <div v-if="active">
-	  <el-date-picker
-      v-model="tempValue"
-      type="date"
-      placeholder="Pick a date"
-	  size="medium">
-    </el-date-picker>
+      <el-date-picker
+        v-model="tempValue"
+        type="date"
+        placeholder="Pick a date"
+        size="medium"
+      >
+      </el-date-picker>
     </div>
-    <div v-else >
+    <div v-else>
       {{ actualValue }}
     </div>
   </div>
@@ -16,10 +17,9 @@
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
-computed: {
+  computed: {
     actualValue() {
       if (this.i18n) {
         return this.item.i18n[this.propertyName][this.currentLocale];
@@ -41,42 +41,42 @@ computed: {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
-    }
+      },
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
-	},
-	i18n: {
+      type: String,
+    },
+    i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

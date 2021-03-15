@@ -1,21 +1,24 @@
  <template>
   <div class="url-div">
     <div v-if="active">
-      <el-input v-model="tempValue" :placeholder="propertyName" type="url" size="medium"></el-input>
+      <el-input
+        v-model="tempValue"
+        :placeholder="propertyName"
+        type="url"
+        size="medium"
+      ></el-input>
     </div>
-    <div v-else
-	class="url-div">
-      <img :src="actualValue" :alt="actualValue" class="image">
+    <div v-else class="url-div">
+      <img :src="actualValue" :alt="actualValue" class="image" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
-computed: {
+  computed: {
     actualValue() {
       if (this.i18n) {
         return this.item.i18n[this.propertyName][this.currentLocale];
@@ -37,54 +40,54 @@ computed: {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
-    }
+      },
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
-	},
-	i18n: {
+      type: String,
+    },
+    i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
 <style>
 .image {
-	width: 100px;
+  width: 100px;
 }
 .url-div {
-	padding: 5px 0 5px 0;
+  padding: 5px 0 5px 0;
 }
 audio {
-	height: 35px;
+  height: 35px;
 }
 .url {
   color: #607cc4;

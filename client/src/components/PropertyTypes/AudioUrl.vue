@@ -1,13 +1,19 @@
  <template>
   <div class="audiourl-div">
     <div v-if="active">
-      <el-input v-model="tempValue" :placeholder="propertyName" type="url" size="medium"></el-input>
+      <el-input
+        v-model="tempValue"
+        :placeholder="propertyName"
+        type="url"
+        size="medium"
+      ></el-input>
     </div>
-    <div v-else
-	class="url-div">
+    <div v-else class="url-div">
       <audio controls>
-        <source :src="actualValue" type="audio/mpeg">
-		<a :href="actualValue" class="url">{{ actualValue }}</a>
+        <source :src="actualValue" type="audio/mpeg" />
+        <a :href="actualValue" class="url">
+			{{ actualValue }}
+		</a>
       </audio>
     </div>
   </div>
@@ -15,10 +21,9 @@
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
-computed: {
+  computed: {
     actualValue() {
       if (this.i18n) {
         return this.item.i18n[this.propertyName][this.currentLocale];
@@ -40,52 +45,52 @@ computed: {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
-    }
+      },
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
-	},
-	i18n: {
+      type: String,
+    },
+    i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
 <style>
 .audiourl-div {
-	width: 300px;
-	padding: 5px 0 5px 0;
+  width: 300px;
+  padding: 5px 0 5px 0;
 }
 audio {
-	height: 30px;
+  height: 30px;
 }
 .url {
   color: #607cc4;

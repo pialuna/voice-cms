@@ -1,7 +1,12 @@
  <template>
   <div class="urlfield-div">
     <div v-if="active">
-      <el-input v-model="tempValue" :placeholder="propertyName" type="url" size="medium"></el-input>
+      <el-input
+        v-model="tempValue"
+        :placeholder="propertyName"
+        type="url"
+        size="medium"
+      ></el-input>
     </div>
     <div v-else class="url-div">
       <a :href="actualValue" class="url">{{ actualValue }}</a>
@@ -11,8 +16,7 @@
 
 <script>
 export default {
-  created() {
-  },
+  created() {},
 
   computed: {
     actualValue() {
@@ -36,42 +40,42 @@ export default {
         } else {
           this.tempItem[this.propertyName] = value;
         }
-      }
-    }
+      },
+    },
   },
 
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     tempItem: {
       type: Object,
-      required: true
+      required: true,
     },
     propertyName: {
       type: String,
-      required: true
+      required: true,
     },
     collectionId: {
-      type: String
+      type: String,
     },
     projectId: {
-      type: String
+      type: String,
     },
     i18n: {
       type: Boolean,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
-	currentLocale: {
+    currentLocale: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 

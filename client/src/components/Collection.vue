@@ -10,10 +10,11 @@
       <div>
         <el-card>
           <h5>Name</h5>
-          <el-input 
-		  v-model="propertyName" 
-		  placeholder="Property Name (Column Name)">
-		  </el-input>
+          <el-input
+            v-model="propertyName"
+            placeholder="Property Name (Column Name)"
+          >
+          </el-input>
         </el-card>
         <el-card>
           <h5>Type</h5>
@@ -21,12 +22,15 @@
             <el-tag>
               <i :class="icon(propertyType)"></i>
             </el-tag>
-            <el-tooltip content="The type of content that can be saved in this property (column).">
-              <el-select 
-			  v-model="propertyType" 
-			  placeholder="Type" 
-			  class="prop-field" 
-			  size="small">
+            <el-tooltip
+              content="The type of content that can be saved in this property (column)."
+            >
+              <el-select
+                v-model="propertyType"
+                placeholder="Type"
+                class="prop-field"
+                size="small"
+              >
                 <el-option
                   v-for="type in types"
                   :key="type.value"
@@ -45,7 +49,8 @@
             </el-tag>
             <el-tooltip
               content="Internationalization: This property's content will be different for each locale/language."
-              placement="top">
+              placement="top"
+            >
               <el-switch v-model="propertyI18n"></el-switch>
             </el-tooltip>
           </div>
@@ -58,71 +63,87 @@
     </el-dialog>
     <!-- Dialog End  -->
 
-
-    <h2 class="text-2xl font-bold text-gray-900">{{ projectName }}</h2>
+    <h2 class="text-2xl font-bold text-gray-900">
+      {{ projectName }}
+    </h2>
 
     <div class="mt-4">
-
-    <div class="flex">
+      <div class="flex">
         <router-link
-          v-for="coll in collections" :key="coll._id" :index="coll.name" href="#"
+          v-for="coll in collections"
+          :key="coll._id"
+          :index="coll.name"
+          href="#"
           :to="{ path: '/projects/' + projectId + '/collections/' + coll._id }"
           replace
           class="rounded pt-3 pb-3.5 px-4"
           activeClass="bg-white shadow-tab"
-        >{{coll.name}}</router-link>
-     </div>
-
-    <div class="bg-white shadow rounded-lg py-2 px-4 -mt-1">
-
-    <div class="flex justify-between border-b border-gray-300">
-
-      <el-tabs v-model="currentLocale">
-          <el-tab-pane
-            v-for="locale in collection.locales"
-            :key="locale"
-            :name="locale"
-            :label="locale"
-          >
-            <span class="px-2" slot="label">
-              <i class="el-icon-location"></i>
-              {{locale}}
-            </span>
-          </el-tab-pane>
-        </el-tabs>
-
-      <div class="flex my-2">
-        <input v-model="search" type="search" name="search" placeholder="Search" class="bg-gray-50 shadow-inner mr-2 h-10 pl-6 pr-4 rounded-full text-sm focus:outline-none">
-
-        <button @click="newItem" class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200">
-			New Item
-		</button>
+          >{{ coll.name }}</router-link
+        >
       </div>
-    </div>
 
+      <div class="bg-white shadow rounded-lg py-2 px-4 -mt-1">
+        <div class="flex justify-between border-b border-gray-300">
+          <el-tabs v-model="currentLocale">
+            <el-tab-pane
+              v-for="locale in collection.locales"
+              :key="locale"
+              :name="locale"
+              :label="locale"
+            >
+              <span class="px-2" slot="label">
+                <i class="el-icon-location"></i>
+                {{ locale }}
+              </span>
+            </el-tab-pane>
+          </el-tabs>
 
-    <div class="overflow-auto">
+          <div class="flex my-2">
+            <input
+              v-model="search"
+              type="search"
+              name="search"
+              placeholder="Search"
+              class="bg-gray-50 shadow-inner mr-2 h-10 pl-6 pr-4 rounded-full text-sm focus:outline-none"
+            />
 
-      <table class="w-full table-auto text-sm">
-        <thead class="text-left bg-gray-100">
-          <tr>
+            <button
+              @click="newItem"
+              class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
+            >
+              New Item
+            </button>
+          </div>
+        </div>
 
-            <!-- a Column for each Item Property -->
-            <th class="py-4" v-for="(property, index) in properties" :key="index">
-              <!-- type icon, i18n icon -->
-              <div class="text-gray-900 pl-2">
-                {{ property.name }}
-                <el-tag size="mini" class="bg-gray-200 border-gray-300">
-                  <i :class="icon(property.type)" class="text-gray-500"></i>
-                </el-tag>
-                <el-tag v-if="property.i18n" size="mini" class="bg-indigo-100 border-indigo-200">
-                  <i class="el-icon-location text-indigo-500"></i>
-                </el-tag>
-              </div>
-            </th>
+        <div class="overflow-auto">
+          <table class="w-full table-auto text-sm">
+            <thead class="text-left bg-gray-100">
+              <tr>
+                <!-- a Column for each Item Property -->
+                <th
+                  class="py-4"
+                  v-for="(property, index) in properties"
+                  :key="index"
+                >
+                  <!-- type icon, i18n icon -->
+                  <div class="text-gray-900 pl-2">
+                    {{ property.name }}
+                    <el-tag size="mini" class="bg-gray-200 border-gray-300">
+                      <i :class="icon(property.type)" class="text-gray-500"></i>
+                    </el-tag>
+                    <el-tag
+                      v-if="property.i18n"
+                      size="mini"
+                      class="bg-indigo-100 border-indigo-200"
+                    >
+                      <i class="el-icon-location text-indigo-500"></i>
+                    </el-tag>
+                  </div>
+                </th>
 
-			<!-- add new property (column) to collection (currently not working) -->
-             <!-- <th>
+                <!-- add new property (column) to collection (currently not working) -->
+                <!-- <th>
               <el-button
                 circle
                 icon="el-icon-plus"
@@ -131,35 +152,33 @@
               ></el-button>
             </th>  -->
 
-            <!-- Operations Column with Buttons -->
-            <th></th>
-			
-          </tr>
-        </thead>
+                <!-- Operations Column with Buttons -->
+                <th></th>
+              </tr>
+            </thead>
 
-        <tbody>
-          <!-- the item.data object is passed down to item-component as the prop "item",
-          which contains every relevant item data (and not the itemID or collectionID)-->
-          <item-component
-            v-for="item in filteredData()"
-            :key="item._id"
-            :_id="item._id"
-            :item="item.data"
-            :properties="properties"
-            :currentLocale="currentLocale"
-            :variables="variables"
-            :collectionId="collectionId"
-            :projectId="projectId"
-            :active="activeItemId === item._id"
-            @setActive="activeItemId = item._id"
-            @unsetActive="activeItemId = null"
-          ></item-component>
-        </tbody>
-		
-      </table>
+            <tbody>
+              <!-- the item.data object is passed down to item-component as the prop "item",
+          	  which contains every relevant item data (and not the itemID or collectionID)-->
+              <item-component
+                v-for="item in filteredData()"
+                :key="item._id"
+                :_id="item._id"
+                :item="item.data"
+                :properties="properties"
+                :currentLocale="currentLocale"
+                :variables="variables"
+                :collectionId="collectionId"
+                :projectId="projectId"
+                :active="activeItemId === item._id"
+                @setActive="activeItemId = item._id"
+                @unsetActive="activeItemId = null"
+              ></item-component>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -169,14 +188,14 @@ import Item from "./Item.vue";
 export default {
   // local components
   components: {
-    itemComponent: Item
+    itemComponent: Item,
   },
 
   async created() {
     // initialize this Collection in the store
     await this.$store.dispatch("initCollection", {
       projectId: this.projectId,
-      collectionId: this.collectionId
+      collectionId: this.collectionId,
     });
   },
 
@@ -202,67 +221,67 @@ export default {
       propertyName: "",
       propertyType: "textfield",
       propertyI18n: false,
-	  // to do: outsource this type data (also used in Collections.vue and in the store)
+      // to do: outsource this type data (also used in Collections.vue and in the store)
       types: [
         {
           value: "textfield",
           label: "Textfield",
-          icon: "document-remove"
+          icon: "document-remove",
         },
         {
           value: "textarray",
           label: "Text Array",
-          icon: "tickets"
+          icon: "tickets",
         },
         {
           value: "urlfield",
           label: "URL",
-          icon: "link"
+          icon: "link",
         },
         {
           value: "audiourl",
           label: "Audio URL",
-          icon: "headset"
+          icon: "headset",
         },
         {
           value: "imageurl",
           label: "Image URL",
-          icon: "picture"
+          icon: "picture",
         },
         {
           value: "boolean",
           label: "Boolean",
-          icon: "open"
+          icon: "open",
         },
         {
           value: "checkbox",
           label: "Checkbox",
-          icon: "check"
+          icon: "check",
         },
         {
           value: "tags",
           label: "Tags",
-          icon: "copy-document"
+          icon: "copy-document",
         },
         {
           value: "date",
           label: "Date",
-          icon: "date"
-        }
-      ]
+          icon: "date",
+        },
+      ],
     };
   },
 
   methods: {
     // get associated icon of this property type
     icon(propType) {
-      const obj = this.types.find(obj => obj.value === propType);
+      const obj = this.types.find((obj) => obj.value === propType);
       return "el-icon-" + obj.icon;
     },
     editCollection() {
       // to do: edit Collection name and properties
     },
-	// to do: debug "createProperty" feature or replace it through "editCollection"
+    // to do: debug "createProperty" feature or replace it through "editCollection"
     createProperty() {
       this.createPropDialogVisible = false;
       this.propertyName = this.propertyName.toLowerCase().replace(/\s/g, "");
@@ -271,7 +290,7 @@ export default {
         type: this.propertyType,
         i18n: this.propertyI18n,
         projectId: this.projectId,
-        collectionId: this.collectionId
+        collectionId: this.collectionId,
       });
     },
 
@@ -280,7 +299,7 @@ export default {
     newItem() {
       this.$store.dispatch("newItem", {
         projectId: this.projectId,
-        collectionId: this.collectionId
+        collectionId: this.collectionId,
       });
       this.activeItemId = "new";
     },
@@ -292,13 +311,11 @@ export default {
         return;
       }
       return this.items.filter(
-        item =>
+        (item) =>
           !this.search ||
-          JSON.stringify(item)
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
+          JSON.stringify(item).toLowerCase().includes(this.search.toLowerCase())
       );
-    }
+    },
   },
 
   // getting ids from route
@@ -322,16 +339,16 @@ export default {
           const v = value.replace("{{", "").replace("}}", "");
           variables.push({
             name: v,
-            value: ''
+            value: "",
           });
         }
         return variables;
-	  },
-	  set(array) {
-		  this.variables = array;
-	  }
-	},
-	
+      },
+      set(array) {
+        this.variables = array;
+      },
+    },
+
     projectName() {
       const project = this.$store.getters.project(this.projectId);
       return project.name;
@@ -351,8 +368,8 @@ export default {
     // all collections of the project
     collections() {
       return this.$store.getters.collections(this.projectId) || [];
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -374,6 +391,6 @@ export default {
 }
 
 .el-tabs__header {
-    margin: 0;
+  margin: 0;
 }
 </style>

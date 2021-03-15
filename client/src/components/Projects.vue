@@ -3,7 +3,7 @@
     <!-- Dialog: Create a new Project -->
     <el-dialog :visible.sync="dialogVisible">
       <span slot="title">
-        <h4><i class="el-icon-tickets"></i> Create New Project</h4>
+        <h4><i class="el-icon-tickets"></i> Create New Project </h4>
       </span>
       <!-- Name -->
       <el-card class="box-card">
@@ -53,9 +53,12 @@
 
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-2xl font-bold text-gray-900">Projects</h2>
-      <button @click="openDialog" class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200">
-		  New Project
-	  </button>
+      <button
+        @click="openDialog"
+        class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
+      >
+        New Project
+      </button>
     </div>
 
     <div v-for="project in projects" :key="project._id">
