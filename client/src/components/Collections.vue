@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="bg-white shadow rounded-lg p-8 mt-8">
       <div class="flex justify-between items-center pb-6 mb-8 border-b">
         <h3 class="text-xl font-bold text-gray-900">Collections</h3>
@@ -39,10 +38,10 @@
       </div>
     </div>
 
-	<!-- Dialog: Create a new Collection -->
+    <!-- Dialog: Create a new Collection -->
     <el-dialog :visible.sync="dialogVisible">
       <span slot="title">
-        <h4><i class="el-icon-tickets"></i>Create New Collection</h4>
+        <h4><i class="el-icon-tickets mr-2"></i>Create New Collection</h4>
       </span>
       <!-- Name -->
       <el-card class="box-card">
@@ -66,6 +65,7 @@
           closable
           :disable-transitions="false"
           @close="handleLocaleClose(locale)"
+          class="mr-1"
           >{{ locale }}</el-tag
         >
         <el-input
@@ -88,24 +88,46 @@
       <!-- Locales End -->
       <!-- Properties -->
       <el-card class="box-card">
-        <div slot="header" class="clearfix">
+        <div slot="header" class="">
           <h5>Properties (Columns)</h5>
         </div>
-        <div v-for="(property, index) in properties" :key="index">
-          <div class="new-prop">
-            <el-input
-              v-model="property.name"
-              placeholder="Property (Column) Name"
-              size="small"
-              class="prop-field"
-            ></el-input>
-            <el-tooltip
-              content="The type of content that can be saved in this property (column)."
-            >
-              <div>
-                <el-tag>
-                  <i :class="icon(property.type)"></i>
+        <div
+          v-for="(property, index) in properties"
+          :key="index"
+          class="border-b mb-2 p-2 flex"
+        >
+          <div class="w-full flex-col mb-2">
+            <h6 class="mb-2">
+				{{ index + 1 }}. Column
+			</h6>
+            <div class="flex justify-between items-center mb-1">
+              <div class="flex items-center">
+                <el-tag size="default" class="mr-1">
+                  <i class="el-icon-edit"></i>
                 </el-tag>
+                <el-tooltip content="The name of this property (column)">
+                  <el-input
+                    v-model="property.name"
+                    placeholder="Column Name"
+                    size="small"
+                    class="prop-field"
+                  ></el-input>
+                </el-tooltip>
+              </div>
+              <el-button
+                @click.native.prevent="removeProperty(property)"
+                icon="el-icon-delete"
+                circle
+                size="mini"
+              ></el-button>
+            </div>
+            <div class="flex items-center mb-1">
+              <el-tag class="mr-1">
+                <i :class="icon(property.type)"></i>
+              </el-tag>
+              <el-tooltip
+                content="What type of content can be saved in this property (column)?"
+              >
                 <el-select
                   v-model="property.type"
                   placeholder="Type"
@@ -119,25 +141,18 @@
                     :value="propType.value"
                   ></el-option>
                 </el-select>
-              </div>
-            </el-tooltip>
-
-            <el-tooltip
-              content="Internationalization: This property's content will be different for each locale/language."
-            >
-              <div>
-                <el-tag size="default">
-                  <i class="el-icon-location"></i>
-                </el-tag>
+              </el-tooltip>
+            </div>
+            <div class="flex items-center mb-1">
+              <el-tag size="default" class="mr-1">
+                <i class="el-icon-location"></i>
+              </el-tag>
+              <el-tooltip
+                content="Internationalization: Will this property's content be different for each locale/language?"
+              >
                 <el-switch v-model="property.i18n"></el-switch>
-              </div>
-            </el-tooltip>
-            <el-button
-              @click.native.prevent="removeProperty(property)"
-              icon="el-icon-delete"
-              circle
-              size="mini"
-            ></el-button>
+              </el-tooltip>
+            </div>
           </div>
           <hr v-if="properties.length > 1" class="array-hr" />
         </div>
@@ -145,7 +160,9 @@
           @click.native.prevent="newProperty"
           icon="el-icon-plus"
           circle
+          type="primary"
           size="mini"
+          class=""
         ></el-button>
       </el-card>
       <!-- Properties End -->
@@ -155,7 +172,6 @@
       </span>
     </el-dialog>
     <!-- Dialog End -->
-
   </div>
 </template>
 
@@ -246,7 +262,7 @@ export default {
         {
           value: "textarray",
           label: "Text Array",
-          icon: "tickets",
+          icon: "chat-dot-round",
         },
         {
           value: "urlfield",
@@ -286,9 +302,14 @@ export default {
       ],
       properties: [
         {
-          name: "",
+          name: "key",
           type: "textfield",
           i18n: false,
+        },
+        {
+          name: "",
+          type: "textarray",
+          i18n: true,
         },
       ],
       // Locale Tags Data

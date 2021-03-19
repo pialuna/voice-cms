@@ -91,7 +91,7 @@ export default {
   max-width: 200px;
 }
 .url {
-  color: #607cc4;
+  color: #6366f1;
   text-overflow: ellipsis ellipsis;
   white-space: nowrap;
   overflow: hidden;

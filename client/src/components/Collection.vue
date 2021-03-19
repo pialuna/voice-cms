@@ -232,7 +232,7 @@ export default {
         {
           value: "textarray",
           label: "Text Array",
-          icon: "tickets",
+          icon: "chat-dot-round",
         },
         {
           value: "urlfield",

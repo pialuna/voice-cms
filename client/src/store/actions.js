@@ -126,33 +126,6 @@ export default {
 		}
 	},
 
-	// initCollection_OLD({ dispatch, commit, state }, payload) {
-	// 	// payload contains: projectId, collectionId
-	// 	console.log('action: initCollection');
-	// 	console.log(payload);
-	// 	// load collection from dummy api
-	// 	const project = dummyData.projects.find(project => project._id === payload.projectId);
-	// 	const collection = project.collections.find(collection => collection._id === payload.collectionId);
-	// 	console.log('loaded collection: ');
-	// 	console.log(collection);
-	// 	const projectInState = state.projects.find(project => project._id === payload.projectId);
-	// 	// console.log(projectInState);
-	// 	// in case the collection is called directly through its url -> !collections
-	// 	if (!projectInState.collections) {
-	// 		console.log('!project.collections');
-	// 		dispatch("initCollections", {
-	// 			projectId: payload.projectId
-	// 		});
-	// 	}
-	// 	//let collectionInState = projectInState.collections.find(collection => collection._id === payload.collectionId);
-	// 	// console.log(collectionInState);
-	// 	commit('INIT_COLLECTION', {
-	// 		// payload
-	// 		projectId: payload.projectId,
-	// 		collection: collection
-	// 	});
-	// },
-
 	async createCollection({ commit }, payload) {
 		// payload contains: collectionName, properties obj-array, locales string-array, projectId
 		console.log('action: createCollection');
