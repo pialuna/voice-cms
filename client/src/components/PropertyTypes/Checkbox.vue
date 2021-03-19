@@ -75,33 +75,37 @@ export default {
 </script>
 
 <style>
-/* checkbox style */
+/* Element UI checkbox style */
 /* not checked */
 .el-checkbox__input .el-checkbox__inner {
-  background-color: #ebeef5;
-  border-color: #409eff;
+  background-color: #e0e7ff;
+  border-color: #6366f1;
+}
+.el-checkbox__input .el-checkbox__inner::after {
+  border-color: #6366f1;
+  border-width: 3px;
 }
 /* not checked, disabled */
 .el-checkbox__input.is-disabled .el-checkbox__inner {
-  background-color: #fff;
-  border-color: #409eff;
+  background-color: #e0e7ff;
+  border-color: #6366f1;
   cursor: not-allowed;
 }
 /* checked */
 .el-checkbox__input.is-checked .el-checkbox__inner {
-  background-color: #ebeef5;
-  border-color: #409eff;
-  color: #409eff;
+  background-color: #e0e7ff;
+  border-color: #6366f1;
+  color: #6366f1;
 }
 .el-checkbox__input.is-checked .el-checkbox__inner::after {
-  border-color: #409eff;
+  border-color: #6366f1;
   border-width: 3px;
 }
 /* checked, disabled */
 .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
-  background-color: #409eff;
-  border-color: #409eff;
-  color: #409eff;
+  background-color: #6366f1;
+  border-color: #6366f1;
+  color: #6366f1;
 }
 .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
   border-color: #ffffff;

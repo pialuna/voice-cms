@@ -94,4 +94,11 @@ export default {
 .boolean-div {
   width: 200px;
 }
+/* Element UI switch style */
+.el-switch__label.is-active {
+	color: #6366f1;
+}
+.el-switch__label{
+	color: #6366f1;
+}
 </style>

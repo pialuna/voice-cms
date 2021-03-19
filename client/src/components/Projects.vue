@@ -1,5 +1,26 @@
 <template>
   <div>
+
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold text-grey-900">Projects</h2>
+      <button
+        @click="openDialog"
+        class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
+      >
+        New Project
+      </button>
+    </div>
+
+    <div v-for="project in projects" :key="project._id">
+      <router-link :to="'/projects/' + project._id">
+        <div class="bg-white p-4 mb-4 shadow rounded-lg">
+          <h4 class="text-grey-900 font-medium">
+            <a>{{ project.name }}</a>
+          </h4>
+        </div>
+      </router-link>
+    </div>
+	
     <!-- Dialog: Create a new Project -->
     <el-dialog :visible.sync="dialogVisible">
       <span slot="title">
@@ -51,25 +72,6 @@
     </el-dialog>
     <!-- Dialog End -->
 
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold text-gray-900">Projects</h2>
-      <button
-        @click="openDialog"
-        class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
-      >
-        New Project
-      </button>
-    </div>
-
-    <div v-for="project in projects" :key="project._id">
-      <router-link :to="'/projects/' + project._id">
-        <div class="bg-white p-4 mb-4 shadow rounded-lg">
-          <h4 class="text-gray-900">
-            <a>{{ project.name }}</a>
-          </h4>
-        </div>
-      </router-link>
-    </div>
   </div>
 </template>
 

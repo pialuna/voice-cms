@@ -1,11 +1,11 @@
  <template>
   <tr
     :class="
-      'hover:bg-indigo-50 border-b border-gray-200 transition ease-out duration-200 tablerow ' 
+      'hover:bg-purple-50 border-b border-gray-200 transition ease-out duration-200 tablerow ' 
 	  + tablerow
     "
   >
-    <td v-for="(property, index) in properties" :key="index" class="px-2 py-6">
+    <td v-for="(property, index) in properties" :key="index" class="px-6 py-4">
       <!-- the objects "item" and "tempItem" are passed down to property-component.
       item: for knowing the true value, that's in the store and db. 
       tempItem: a copy of "item" for editing and caching. -->
@@ -24,13 +24,13 @@
     </td>
 
     <!-- BUTTONS -->
-    <td class="buttons-td">
+    <td class="px-6 py-4">
       <div class="buttons-div">
         <!-- edit button -->
-        <div v-if="!active">
+        <div v-if="!active" class="flex items-center">
           <el-button
             @click="editItem(item)"
-            class="edit-button"
+            class="edit-button hover:border-indigo-500 hover:bg-indigo-100 hover:text-indigo-500"
             size="mini"
             icon="el-icon-edit"
             circle
@@ -40,25 +40,27 @@
           </span>
         </div>
         <!-- cancel, delete, save button -->
-        <div v-else>
+        <div v-else class="flex items-center">
           <el-button
             @click="cancel(item)"
             icon="el-icon-close"
             circle
             size="mini"
+			class="hover:border-indigo-500 hover:bg-indigo-100 hover:text-indigo-500"
+          ></el-button>
+          <el-button
+            @click="saveItem(item)"
+            icon="el-icon-check"
+            type="primary"
+            circle
+            size="mini"
+			class="bg-indigo-500 border-indigo-500 hover:border-indigo-500 hover:bg-indigo-100 hover:text-indigo-500"
           ></el-button>
           <el-button
             @click="deleteItem(item)"
             icon="el-icon-delete"
             type="danger"
             plain
-            circle
-            size="mini"
-          ></el-button>
-          <el-button
-            @click="saveItem(item)"
-            icon="el-icon-check"
-            type="primary"
             circle
             size="mini"
           ></el-button>
@@ -179,7 +181,7 @@ export default {
 }
 .tablerow:hover > td > .buttons-div > div > .edit-button {
   visibility: visible;
-  transition: 2s;
+  transition: 1s;
 }
 .el-button--mini.is-circle {
   margin: 3px;

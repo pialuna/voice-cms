@@ -4,7 +4,7 @@
 // get objects from the state
 
 export default {
-	
+
 	projects(state) {
 		console.log('getter: projects');
 		return state.projects;
@@ -13,7 +13,6 @@ export default {
 		console.log('getter: project');
 		return (projectId) => {
 			const project = state.projects.find(project => project._id === projectId);
-			console.log('STATE', state);
 			return project;
 		}
 	},

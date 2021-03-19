@@ -1,6 +1,45 @@
 <template>
   <div>
-    <!-- Dialog: Create a new Collection -->
+
+    <div class="bg-white shadow rounded-lg p-8 mt-8">
+      <div class="flex justify-between items-center pb-6 mb-8 border-b">
+        <h3 class="text-xl font-bold text-gray-900">Collections</h3>
+        <button
+          @click="openDialog"
+          class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
+        >
+          New Collection
+        </button>
+      </div>
+      <div v-for="collection in collections" :key="collection._id">
+        <router-link
+          :to="{
+            path: '/projects/' + projectId + '/collections/' + collection._id,
+          }"
+          replace
+        >
+          <div class="mb-6">
+            <h4 class="font-bold mb-2">
+              <a>{{ collection.name }}</a>
+            </h4>
+            <div class="flex flex-wrap">
+              <div
+                class="mr-1 mb-1"
+                v-for="(property, index) in collection.properties"
+                :key="index"
+              >
+                <el-tag size="small" type="info">
+                  <i :class="icon(property.type)"></i>
+                  {{ property.name }}
+                </el-tag>
+              </div>
+            </div>
+          </div>
+        </router-link>
+      </div>
+    </div>
+
+	<!-- Dialog: Create a new Collection -->
     <el-dialog :visible.sync="dialogVisible">
       <span slot="title">
         <h4><i class="el-icon-tickets"></i>Create New Collection</h4>
@@ -117,43 +156,6 @@
     </el-dialog>
     <!-- Dialog End -->
 
-    <div class="bg-white shadow rounded-lg p-8 mt-8">
-      <div class="flex justify-between items-center pb-6 mb-8 border-b">
-        <h3 class="text-xl font-bold text-gray-900">Collections</h3>
-        <button
-          @click="openDialog"
-          class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
-        >
-          New Collection
-        </button>
-      </div>
-      <div v-for="collection in collections" :key="collection._id">
-        <router-link
-          :to="{
-            path: '/projects/' + projectId + '/collections/' + collection._id,
-          }"
-          replace
-        >
-          <div class="mb-6">
-            <h4 class="font-bold mb-2">
-              <a>{{ collection.name }}</a>
-            </h4>
-            <div class="flex flex-wrap">
-              <div
-                class="mr-1 mb-1"
-                v-for="(property, index) in collection.properties"
-                :key="index"
-              >
-                <el-tag size="small" type="info">
-                  <i :class="icon(property.type)"></i>
-                  {{ property.name }}
-                </el-tag>
-              </div>
-            </div>
-          </div>
-        </router-link>
-      </div>
-    </div>
   </div>
 </template>
 

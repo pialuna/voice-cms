@@ -6,7 +6,6 @@
         :key="index"
         closable
         disable-transitions
-        class="bg-indigo-200"
         @close="handleClose(value)"
         size="medium"
       >
@@ -145,10 +144,7 @@ export default {
 }
 .button-new-tag {
   margin: 3px;
-  height: 32px;
-  line-height: 30px;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 6px;
 }
 .input-new-tag {
   width: 90px;

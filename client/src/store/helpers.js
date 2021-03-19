@@ -1,3 +1,5 @@
+// helper functions 
+// to do: refactor
 
 function getProject(state, projectId) {
 	const project = state.projects.find(project => project._id === projectId);

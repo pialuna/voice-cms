@@ -12,7 +12,7 @@
           type="textarea"
           autosize
           placeholder="text"
-          class=""
+          class="min-w-full"
         >
         </el-input>
         <!-- delete -->

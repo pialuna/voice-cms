@@ -1,6 +1,123 @@
  <template>
   <div>
-    <!-- Dialog Create New Property -->
+    <h2 class="text-2xl font-bold text-gray-900">
+      {{ projectName }}
+    </h2>
+
+    <div class="mt-4">
+      <div class="flex">
+        <router-link
+          v-for="coll in collections"
+          :key="coll._id"
+          :index="coll.name"
+          :to="{ path: '/projects/' + projectId + '/collections/' + coll._id }"
+          replace
+          class="rounded pt-3 pb-3.5 px-4"
+          activeClass="bg-white shadow-tab"
+          >
+		  {{ coll.name }}
+		</router-link>
+      </div>
+
+      <div class="bg-white shadow rounded-lg py-2 px-4 -mt-1">
+        <div class="flex justify-between">
+          <el-tabs v-model="currentLocale">
+            <el-tab-pane
+              v-for="locale in collection.locales"
+              :key="locale"
+              :name="locale"
+              :label="locale"
+            >
+              <span class="px-2" slot="label">
+                <i class="el-icon-location"></i>
+                {{ locale }}
+              </span>
+            </el-tab-pane>
+          </el-tabs>
+
+          <div class="flex my-2">
+            <input
+              v-model="search"
+              type="search"
+              name="search"
+              placeholder="Search"
+              class="bg-gray-50 shadow-inner mr-2 h-10 pl-6 pr-4 rounded-full text-sm focus:outline-none"
+            />
+
+            <button
+              @click="newItem"
+              class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
+            >
+              New Item
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-auto">
+          <table class="w-full table-auto text-sm">
+            <thead class="text-left bg-purple-50 border border-gray-200 rounded shadow">
+              <tr>
+                <!-- a Column for each Item Property -->
+                <th
+                  class="px-4 py-4"
+                  v-for="(property, index) in properties"
+                  :key="index"
+                >
+                  <!-- type icon, i18n icon -->
+                  <div class="flex items-center text-indigo-900 pl-2">
+                    {{ property.name }}
+                    <el-tag size="mini" class="bg-gray-200 border-gray-300 ml-1">
+                      <i :class="icon(property.type)" class="text-gray-500"></i>
+                    </el-tag>
+                    <el-tag
+                      v-if="property.i18n"
+                      size="mini"
+                      class="bg-indigo-100 border-indigo-200 ml-1"
+                    >
+                      <i class="el-icon-location text-indigo-500"></i>
+                    </el-tag>
+                  </div>
+                </th>
+
+                <!-- add new property (column) to collection (currently not working) -->
+                <!-- <th>
+              		<el-button
+						circle
+						icon="el-icon-plus"
+						size="small"
+						@click="createPropDialogVisible = true"
+              		></el-button>
+            	</th>  -->
+
+                <!-- Operations Column with Buttons -->
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- the item.data object is passed down to item-component as the prop "item",
+          		which contains every relevant item data (and not the itemID or collectionID)-->
+              <item-component
+                v-for="item in filteredData()"
+                :key="item._id"
+                :_id="item._id"
+                :item="item.data"
+                :properties="properties"
+                :currentLocale="currentLocale"
+                :variables="variables"
+                :collectionId="collectionId"
+                :projectId="projectId"
+                :active="activeItemId === item._id"
+                @setActive="activeItemId = item._id"
+                @unsetActive="activeItemId = null"
+              ></item-component>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+	<!-- Dialog Create New Property -->
     <el-dialog :visible.sync="createPropDialogVisible">
       <span slot="title">
         <h4>
@@ -63,122 +180,6 @@
     </el-dialog>
     <!-- Dialog End  -->
 
-    <h2 class="text-2xl font-bold text-gray-900">
-      {{ projectName }}
-    </h2>
-
-    <div class="mt-4">
-      <div class="flex">
-        <router-link
-          v-for="coll in collections"
-          :key="coll._id"
-          :index="coll.name"
-          href="#"
-          :to="{ path: '/projects/' + projectId + '/collections/' + coll._id }"
-          replace
-          class="rounded pt-3 pb-3.5 px-4"
-          activeClass="bg-white shadow-tab"
-          >{{ coll.name }}</router-link
-        >
-      </div>
-
-      <div class="bg-white shadow rounded-lg py-2 px-4 -mt-1">
-        <div class="flex justify-between border-b border-gray-300">
-          <el-tabs v-model="currentLocale">
-            <el-tab-pane
-              v-for="locale in collection.locales"
-              :key="locale"
-              :name="locale"
-              :label="locale"
-            >
-              <span class="px-2" slot="label">
-                <i class="el-icon-location"></i>
-                {{ locale }}
-              </span>
-            </el-tab-pane>
-          </el-tabs>
-
-          <div class="flex my-2">
-            <input
-              v-model="search"
-              type="search"
-              name="search"
-              placeholder="Search"
-              class="bg-gray-50 shadow-inner mr-2 h-10 pl-6 pr-4 rounded-full text-sm focus:outline-none"
-            />
-
-            <button
-              @click="newItem"
-              class="rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-500 hover:text-white transition ease-out duration-200"
-            >
-              New Item
-            </button>
-          </div>
-        </div>
-
-        <div class="overflow-auto">
-          <table class="w-full table-auto text-sm">
-            <thead class="text-left bg-gray-100">
-              <tr>
-                <!-- a Column for each Item Property -->
-                <th
-                  class="py-4"
-                  v-for="(property, index) in properties"
-                  :key="index"
-                >
-                  <!-- type icon, i18n icon -->
-                  <div class="text-gray-900 pl-2">
-                    {{ property.name }}
-                    <el-tag size="mini" class="bg-gray-200 border-gray-300">
-                      <i :class="icon(property.type)" class="text-gray-500"></i>
-                    </el-tag>
-                    <el-tag
-                      v-if="property.i18n"
-                      size="mini"
-                      class="bg-indigo-100 border-indigo-200"
-                    >
-                      <i class="el-icon-location text-indigo-500"></i>
-                    </el-tag>
-                  </div>
-                </th>
-
-                <!-- add new property (column) to collection (currently not working) -->
-                <!-- <th>
-              <el-button
-                circle
-                icon="el-icon-plus"
-                size="small"
-                @click="createPropDialogVisible = true"
-              ></el-button>
-            </th>  -->
-
-                <!-- Operations Column with Buttons -->
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <!-- the item.data object is passed down to item-component as the prop "item",
-          	  which contains every relevant item data (and not the itemID or collectionID)-->
-              <item-component
-                v-for="item in filteredData()"
-                :key="item._id"
-                :_id="item._id"
-                :item="item.data"
-                :properties="properties"
-                :currentLocale="currentLocale"
-                :variables="variables"
-                :collectionId="collectionId"
-                :projectId="projectId"
-                :active="activeItemId === item._id"
-                @setActive="activeItemId = item._id"
-                @unsetActive="activeItemId = null"
-              ></item-component>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -389,8 +390,21 @@ export default {
   width: 90%;
   margin-right: 5px;
 }
-
 .el-tabs__header {
   margin: 0;
 }
+/* Element UI slinding tabs style */
+/*
+.el-tabs__active-bar{
+	background-color: #6366f1;
+}
+.el-tabs__item .is-active .is-top{
+	background-color: #6366f1;
+
+	color: #6366f1;
+}
+.el-tabs__item.is-active .el-icon-location{
+	color: #6366f1;
+}
+*/
 </style>
