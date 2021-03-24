@@ -146,7 +146,7 @@ As a JavaScript object, a content item looks like this:
 	collection_id: "z5vz48778t8z3z45zv090",
 	data: {
 		key: "qs0",
-        i18n: {
+		i18n: {
 			statement: {
 				en: ["Mount Everest is the tallest mountain in the world. "],
 				de: ["Mount Everest ist der höchste Berg der Welt."]
