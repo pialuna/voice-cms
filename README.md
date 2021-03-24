@@ -133,26 +133,32 @@ Voice CMS supports internationalization, which means that its content can be tra
 For a voice apps `Responses` collection, you won't need a column for each locale - just tag the `response` column as an i18n property.
 Then there will be a toggle to switch conveniently between locales, even while editing an item, like in this example:
 
-![German Responses Collection](/docs/responses-edit-german.png)  
+![Responses Collection German](/docs/responses-edit-german.png)  
 
 The columns with internationalization are marked with the locale icon in the table header.
 
 As a JavaScript object, a content item looks like this:
 
 ```javascript
+// an item of the Quiz Statements collection
 {
-        key: "qs0",
+	_id: "4cnz4c8778t8z3z7t37n8",
+	collection_id: "z5vz48778t8z3z45zv090",
+	data: {
+		key: "qs0",
         i18n: {
-          statement: {
-            en: ["Mount Everest is the tallest mountain in the world. "],
-            de: ["Mount Everest ist der höchste Berg der Welt."]
-          }
+			statement: {
+				en: ["Mount Everest is the tallest mountain in the world. "],
+				de: ["Mount Everest ist der höchste Berg der Welt."]
+			}
         },
         answer: true,
         live: true
+	}     
 }
 ```  
 All properties with internationalization are in a nested `i18n`-object.
+
 
 ### API
 
