@@ -7,6 +7,7 @@ A content management system for voice apps like Alexa Skills and Google Actions.
 * [Introduction](#introduction)
 * [Setup](#setup)
 * [Features](#features)
+
 ## Introduction
 
 The goal of this open source project is to make it easier to manage content for voice platforms like Alexa and Google Assistant. The CMS can be hosted on your own servers so that you have full control of the data.
@@ -19,10 +20,13 @@ Features include:
 * **Jovo Plugin**: Integrate CMS content with apps built with the Jovo Framework
 
 This repository consists of the following elements:
-* `api`: API that handles database calls and structures data. Built with Express.
+* `api`: API that handles database calls and structures data. Built with Express.js.
 * `client`: The CMS frontend. Built with Vue.js and Element UI.
 
 The plugin for the Jovo Framework can be found here: [pialuna/jovo-plugin-voicecms](https://github.com/pialuna/jovo-plugin-voicecms).
+
+A sample Jovo app, that uses the VoiceCMS Plugin can be found here: [/pialuna/jovo-sample-app-voicecms](https://github.com/pialuna/jovo-sample-app-voicecms).
+
 
 ## Setup 
 
@@ -48,7 +52,7 @@ cd api
 cp .env.example .env
 ```
 
-Add the URI to your MongoDB to the `.env`:
+Add your MongoDB Atlas Database URI to the `.env`:
 
 ```
 MONGO_URI=<your-mongodb-uri>
@@ -57,11 +61,11 @@ MONGO_URI=<your-mongodb-uri>
 You can then start the server:
 
 ```bash
-npm run start
+npm start
 ```
 ### Client
 
-To start the Vue.js application, do the following:
+To start the Vue.js frontend application, do the following:
 
 ```bash
 cd client
@@ -72,7 +76,7 @@ Then go to `localhost:8080` to view the app.
 
 ### Integration
 
-Install the Jovo Framework plugin like this:
+Install the Jovo Framework plugin in your Jovo Project like this:
 
 ```bash
 npm install --save jovo-plugin-voicecms
@@ -84,10 +88,11 @@ You can find the full documentation for the plugin here: [pialuna/jovo-plugin-vo
 
 ### Collections
 
-A Voice CMS project contains one or more collections. A collection represents a specific content schema that is used by the voice app. It can be seen as a table that has at least two properties that are represented as columns.
+A Voice CMS project contains one or more collections. A collection represents a specific content schema that is used by the voice app. 
+It can be seen as a table that has at least two properties that are represented as columns.
 
-For example, a `Responses` collection may be used to manage the voice app's responses. It includes at least two columns:
-* A `key` used as identifier
+For example, a `Responses` collection may be used to manage the voice app's responses. It includes two columns:
+* A `key` used as identifier (a basic textfield)
 * A `response` text array field that contains the app output
 
 ![Responses Collection](/docs/responses-collection.png)  
@@ -96,7 +101,7 @@ Each row can be edited. More elements can be added to the `responses` array as w
 
 ![Edit Responses Collection](/docs/responses-edit-english.png)  
 
-### Content Types (Columns)
+### Content Types
 
 Each collection consists of at least two properties (columns) that can have different types.
 
@@ -125,11 +130,12 @@ Booleans and checkboxes look like this:
 
 Voice CMS supports internationalization, which means that its content can be translated into multiple languages.
 
-Inside a collection, there is a toggle to switch between locales:
+For a voice apps `Responses` collection, you won't need a column for each locale - just tag the `response` column as an i18n property.
+Then there will be a toggle to switch conveniently between locales, even while editing an item, like in this example:
 
 ![German Responses Collection](/docs/responses-edit-german.png)  
 
-The properties that have i18n are marked with the locale icon next to the property name in the table header.
+The columns with internationalization are marked with the locale icon in the table header.
 
 All properties with internationalization are in a nested `i18n`-object:
 
@@ -152,11 +158,11 @@ The API contains the following endpoints:
 
 ```
 localhost:1234/projects
-	      /projects/:id
-	      /collections/
-	      /collections/:id
-	      /items/
-	      /items/:id
+	      	  /projects/:id
+	      	  /collections/
+	      	  /collections/:id
+	      	  /items/
+	      	  /items/:id
 ```
 
 To get a complete project (with all its collections and with all items of each collection), send `GET` to `/projects/<your-project-id>?complete=true`. The Jovo Plugin gets the data of a project this way.
