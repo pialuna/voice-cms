@@ -151,9 +151,9 @@ As a JavaScript object, a content item looks like this:
 				en: ["Mount Everest is the tallest mountain in the world. "],
 				de: ["Mount Everest ist der höchste Berg der Welt."]
 			}
-        },
-        answer: true,
-        live: true
+		},
+		answer: true,
+		live: true
 	}     
 }
 ```  
