@@ -116,7 +116,7 @@ The following property types are supported:
 * **Date**: A date picker
 * **URL**: A clickable URL
 
-For example, audio URLs are displayed like this:
+For example, URLs and audio URLs are displayed like this:
 
 ![Sound Collection](/docs/sound-collection.png)  
 
@@ -137,7 +137,7 @@ Then there will be a toggle to switch conveniently between locales, even while e
 
 The columns with internationalization are marked with the locale icon in the table header.
 
-All properties with internationalization are in a nested `i18n`-object:
+As a JavaScript object, a content item looks like this:
 
 ```javascript
 {
@@ -152,6 +152,8 @@ All properties with internationalization are in a nested `i18n`-object:
         live: true
 }
 ```  
+All properties with internationalization are in a nested `i18n`-object.
+
 ### API
 
 The API contains the following endpoints:
