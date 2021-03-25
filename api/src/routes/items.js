@@ -55,8 +55,7 @@ router.get('/:itemId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	// Schema props have to be defined, the number of props can't be unknown
-	//  -> so put everything into "data"
+	// dynamic item content is put into "data" (see models/item.js)
 	let data = req.body.data
 	if (!data) {
 		data = {}

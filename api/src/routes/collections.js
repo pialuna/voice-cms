@@ -62,11 +62,12 @@ router.get("/:collectionId", async (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
+	// see models/collection.js
 	const collection = new Collection({
 		_id: new mongoose.Types.ObjectId(),
 		project_id: req.body.project_id,
 		name: req.body.name,
-		properties: req.body.properties,
+		properties: req.body.properties, // see models/property.js
 		locales: req.body.locales
 	});
 	collection.save()

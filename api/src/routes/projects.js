@@ -86,6 +86,7 @@ router.get("/:projectId", async (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
+	// see models/project.js
 	const project = new Project({
 		_id: new mongoose.Types.ObjectId(),
 		name: req.body.name,
