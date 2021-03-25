@@ -8,6 +8,8 @@ A content management system for voice apps like Alexa Skills and Google Actions.
 * [Setup](#setup)
 * [Features](#features)
 
+
+
 ## Introduction
 
 The goal of this open source project is to make it easier to manage content for voice platforms like Alexa and Google Assistant. The CMS can be hosted on your own servers so that you have full control of the data.
@@ -25,7 +27,7 @@ This repository consists of the following elements:
 
 The plugin for the Jovo Framework can be found here: [pialuna/jovo-plugin-voicecms](https://github.com/pialuna/jovo-plugin-voicecms).
 
-A sample Jovo app, that uses the VoiceCMS Plugin can be found here: [/pialuna/jovo-sample-app-voicecms](https://github.com/pialuna/jovo-sample-app-voicecms).
+A sample Jovo app, that uses the Voice CMS Plugin can be found here: [pialuna/jovo-sample-app-voicecms](https://github.com/pialuna/jovo-sample-app-voicecms).
 
 
 ## Setup 
@@ -130,7 +132,7 @@ Booleans and checkboxes look like this:
 
 Voice CMS supports internationalization, which means that its content can be translated into multiple languages.
 
-For a voice apps `Responses` collection, you won't need a column for each locale - just tag the `response` column as an i18n property.
+For the voice app's `Responses` collection, you won't need a column for each locale - just tag the `response` column as an i18n property.
 Then there will be a toggle to switch conveniently between locales, even while editing an item, like in this example:
 
 ![Responses Collection German](/docs/responses-edit-german.png)  
