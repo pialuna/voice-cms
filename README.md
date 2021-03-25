@@ -168,11 +168,11 @@ The API contains the following endpoints:
 
 ```
 localhost:1234/projects
-	      	  /projects/:id
-	      	  /collections/
-	      	  /collections/:id
-	      	  /items/
-	      	  /items/:id
+	  	  /projects/:id
+	  	  /collections/
+	  	  /collections/:id
+	  	  /items/
+	  	  /items/:id
 ```
 
 To get a complete project (with all its collections and with all items of each collection), send `GET` to `/projects/<your-project-id>?complete=true`. The Jovo Plugin gets the data of a project this way.
