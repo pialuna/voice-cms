@@ -41,23 +41,23 @@
     <!-- Dialog: Create a new Collection -->
     <el-dialog :visible.sync="dialogVisible">
       <span slot="title">
-        <h4><i class="el-icon-tickets mr-2"></i>Create New Collection</h4>
+        <h4 class="text-xl"><i class="el-icon-tickets mr-2"></i>Create New Collection</h4>
       </span>
       <!-- Name -->
-      <el-card class="box-card">
+      <div class="bg-white border-b p-2 pb-4 mb-4">
         <div slot="header" class="clearfix">
-          <h5>Name</h5>
+          <h5 class="mb-4 font-semibold">Name</h5>
         </div>
         <el-input
           v-model="collectionName"
           placeholder="Collection Name"
         ></el-input>
-      </el-card>
+      </div>
       <!-- Name End -->
       <!-- Locales -->
-      <el-card class="box-card">
+      <div class="bg-white border-b p-2 pb-4 mb-4">
         <div slot="header" class="clearfix">
-          <h5>Locales or Languages</h5>
+          <h5 class="mb-4 font-semibold">Locales or Languages</h5>
         </div>
         <el-tag
           :key="locale"
@@ -84,12 +84,12 @@
           @click="showLocaleInput"
           >+ New Locale</el-button
         >
-      </el-card>
+      </div>
       <!-- Locales End -->
       <!-- Properties -->
-      <el-card class="box-card">
+      <div class="bg-white border-b p-2 pb-4 mb-4">
         <div slot="header" class="">
-          <h5>Properties (Columns)</h5>
+          <h5 class="mb-4 font-semibold">Properties (Columns)</h5>
         </div>
         <div
           v-for="(property, index) in properties"
@@ -97,13 +97,14 @@
           class="border-b mb-2 p-2 flex"
         >
           <div class="w-full flex-col mb-2">
-            <h6 class="mb-2">
-				{{ index + 1 }}. Column
-			</h6>
+            <h6 class="mb-2">{{ index + 1 }}. Column</h6>
             <div class="flex justify-between items-center mb-1">
               <div class="flex items-center">
-                <el-tag size="default" class="mr-1">
-                  <i class="el-icon-edit"></i>
+                <el-tag
+                  size="default"
+                  class="bg-indigo-100 border-indigo-200 mr-1"
+                >
+                  <i class="el-icon-edit text-indigo-500"></i>
                 </el-tag>
                 <el-tooltip content="The name of this property (column)">
                   <el-input
@@ -122,8 +123,8 @@
               ></el-button>
             </div>
             <div class="flex items-center mb-1">
-              <el-tag class="mr-1">
-                <i :class="icon(property.type)"></i>
+              <el-tag class="bg-indigo-100 border-indigo-200 mr-1">
+                <i :class="icon(property.type)" class="text-indigo-500"></i>
               </el-tag>
               <el-tooltip
                 content="What type of content can be saved in this property (column)?"
@@ -144,31 +145,44 @@
               </el-tooltip>
             </div>
             <div class="flex items-center mb-1">
-              <el-tag size="default" class="mr-1">
-                <i class="el-icon-location"></i>
+              <el-tag
+                size="default"
+                class="bg-indigo-100 border-indigo-200 mr-1"
+              >
+                <i class="el-icon-location text-indigo-500"></i>
               </el-tag>
               <el-tooltip
                 content="Internationalization: Will this property's content be different for each locale/language?"
               >
-                <el-switch v-model="property.i18n"></el-switch>
+                <el-switch
+                  v-model="property.i18n"
+                  active-color="#6366F1"
+                ></el-switch>
               </el-tooltip>
             </div>
           </div>
-          <hr v-if="properties.length > 1" class="array-hr" />
         </div>
-        <el-button
-          @click.native.prevent="newProperty"
-          icon="el-icon-plus"
-          circle
-          type="primary"
-          size="mini"
-          class=""
-        ></el-button>
-      </el-card>
+		<button
+          @click="newProperty"
+          class="ml-2 rounded-full px-2 text-lg cursor-pointer tracking-wider border-indigo-500 border-2 bg-indigo-500 text-white hover:bg-indigo-100 hover:text-indigo-500 transition ease-out duration-200"
+        >
+         +
+        </button>
+      </div>
       <!-- Properties End -->
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="createCollection">Create</el-button>
+		  <button
+          @click="dialogVisible = false"
+          class="mx-1 rounded-full py-2 px-3 uppercase text-xs font-bold cursor-pointer tracking-wider text-indigo-500 border-indigo-500 border-2 hover:bg-indigo-100 transition ease-out duration-200"
+        >
+          Cancel
+        </button>
+		<button
+          @click="createCollection"
+          class="mx-1 rounded-full py-2 px-4 uppercase text-xs font-bold cursor-pointer tracking-wider border-indigo-500 border-2 bg-indigo-500 text-white hover:bg-indigo-100 hover:text-indigo-500 transition ease-out duration-200"
+        >
+          Create 
+        </button>
       </span>
     </el-dialog>
     <!-- Dialog End -->
